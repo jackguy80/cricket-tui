@@ -1,11 +1,15 @@
 pipeline {
-    agent {
-        docker {
-            image 'rust:latest'
-            args '-v /etc/passwd:/etc/passwd' // Fixes UID mismatch errors
-        }
-    }
+    agent any
     stages {
+        stage('Setup Rust') {
+            steps {
+                sh '''
+                    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+                    source $HOME/.cargo/env
+                    rustc --version
+                '''
+            }
+        }
         stage('Build') {
             steps {
                 sh 'cargo build'
