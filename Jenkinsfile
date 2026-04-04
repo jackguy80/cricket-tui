@@ -12,10 +12,4 @@ pipeline {
             }
         }
     }
-    post {
-        always {
-            // Example: Configure warning parsers for Rust/Clippy
-            // step([$class: 'WarningsPublisher', ...])
-        }
-    }
 }   
