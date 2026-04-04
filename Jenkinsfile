@@ -1,15 +1,10 @@
 pipeline {
-    agent any
-    stages {
-        stage('Setup Rust') {
-            steps {
-                sh '''
-                    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-                    source $HOME/.cargo/env
-                    rustc --version
-                '''
-            }
+    agent {
+        docker {
+            image 'rust:latest'
         }
+    }
+    stages {
         stage('Build') {
             steps {
                 sh 'cargo build'
