@@ -15,5 +15,10 @@ pipeline {
                 sh 'cargo test'
             }
         }
+        stage('Documentation') {
+            steps {
+                sh 'cargo doc'
+            }
+        }
     }
 }   
