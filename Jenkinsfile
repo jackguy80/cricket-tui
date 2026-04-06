@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'cargo install cargo-test-junit && cargo test-junit --name report.xml'
+                sh 'cargo test'
             }
         }
         stage('Documentation') {
@@ -23,7 +23,7 @@ pipeline {
     }
     post {
         always {
-            archiveArtifacts artifacts: 'target/*/cricket-tui, target/doc/**/*, report.xml', fingerprint: true
+            archiveArtifacts artifacts: 'target/*/cricket-tui, target/doc/**/*', fingerprint: true
         }
     }
 }   
