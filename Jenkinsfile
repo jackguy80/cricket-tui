@@ -21,4 +21,10 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            archiveArtifacts artifacts: 'target/**/cricket-tui', fingerprint: true
+            archiveArtifacts artifacts: 'target/doc/**/*', fingerprint: true
+        }
+    }
 }   
